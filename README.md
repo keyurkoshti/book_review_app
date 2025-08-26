@@ -1,10 +1,17 @@
 project_name: book Review app 
 technology: python 
+environment: virtual enviornment
 framework: django
 database: dbsqlite3
+
 
 built a model store book name, photo, url, reviews about book
 use django's built-in forms to create a form for users
 create a view for forms and a hoempage view after save the form users can see what they save.
 users can not direct jump to homepage first they must submit the review form.
+
+
+add user register, login, logout functionality. now user has to register -> login and fill up book review form after that they can see all users review.
+book review page and home page is protected by only logged-in user functionality.
+
 
