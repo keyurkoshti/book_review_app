@@ -1,4 +1,4 @@
-from django import forms # type: ignore
+from django import forms 
 from .models import Book_Review_forms
 
 class user_form(forms.ModelForm):

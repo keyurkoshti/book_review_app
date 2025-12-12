@@ -4,3 +4,5 @@ db.sqlite3
 *.pyo
 static
 templates
+book_photos
+
