@@ -1,9 +1,9 @@
-from django.contrib import messages # type: ignore
-from django.shortcuts import render, redirect # type: ignore
+from django.contrib import messages 
+from django.shortcuts import render, redirect 
 from book_review.models import Book_Review_forms
 from .forms import user_form
-from django.contrib.auth import authenticate, login, logout, get_user_model # type: ignore
-from django.contrib.auth.decorators import login_required # type: ignore
+from django.contrib.auth import authenticate, login, logout, get_user_model 
+from django.contrib.auth.decorators import login_required 
 
 User = get_user_model()
 
@@ -41,6 +41,7 @@ def login_user(request):
 
         if user is not None:
             login(request, user)
+            request.session.set_expiry(900)
             return redirect('form_view') 
         else:
             messages.error(request, "Invalid credentials")
@@ -77,3 +78,4 @@ def form_view(request):
 def home(request):
     reviews = Book_Review_forms.objects.all().order_by('-id')
     return render(request, 'home.html', {'reviews': reviews})   
+

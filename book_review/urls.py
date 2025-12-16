@@ -1,4 +1,4 @@
-from django.urls import path # type: ignore
+from django.urls import path 
 from .views import form_view, home
 from book_review import views
 
@@ -9,3 +9,4 @@ urlpatterns = [
     path('form/', form_view, name='form_view'),
     path('home/', home, name='home'),
 ]
+

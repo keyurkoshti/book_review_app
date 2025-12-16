@@ -1,5 +1,6 @@
-from django.db import models # type: ignore
-from django.contrib.auth.models import User  # type: ignore
+from django.db import models 
+from django.contrib.auth.models import User  
+from django.utils import timezone 
 
 # Create your models here.
 class Book_Review_forms(models.Model):
@@ -8,9 +9,10 @@ class Book_Review_forms(models.Model):
     book_photo=models.ImageField(upload_to='book_photos/')
     book_url=models.URLField()
     book_review=models.CharField(max_length=500)
+    created_at = models.DateTimeField(default=timezone.now) 
 
     def __str__(self):
-        return f"{self.book_name} - {self.user.username}"
+        return f"{self.book_name} - {self.user}"
 
 
     
