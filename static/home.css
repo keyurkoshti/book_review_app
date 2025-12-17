@@ -1,0 +1,89 @@
+/* General Page Styling */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+/* Heading */
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+/* Review Card */
+div {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect */
+div:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+}
+
+/* div {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+div:hover {
+    transform: scale(1.02);
+} */
+
+/* Book Title */
+h3 {
+    color: #2980b9;
+    margin-top: 0;
+}
+
+/* Book Image */
+img {
+    display: block;
+    margin: 10px 0;
+    border-radius: 6px;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Book URL link */
+a {
+    color: #27ae60;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Review Text */
+p {
+    line-height: 1.6;
+    margin: 8px 0;
+}
+
+/* Reviewed By */
+em {
+    color: #7f8c8d;
+}
+
+/* Horizontal Rule */
+hr {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 20px 0;
+}

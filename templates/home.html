@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Reviews</title>
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+</head>
+<body>
+
+<h1>All Book Reviews</h1>
+{% for review in reviews %}
+    <div class="review-card">
+        <h3>{{ review.book_name }}</h3>
+        {% if review.book_photo %}
+            <img src="{{ review.book_photo.url }}" alt="{{ review.book_name }}" width="150">
+        {% endif %}
+        <p><strong>Book Url:</strong> <a href="{{ review.book_url }}">{{ review.book_url }}</a></p>
+        <p><strong>Review:</strong> {{ review.book_review }}</p>
+        <p><em>Reviewed by: {{ review.user.username }}</em></p>
+        {% comment %} <p><em>Reviewed on: {{ review.created_at|date:"F j, Y, g:i a" }}</em></p> {% endcomment %}
+    </div>
+    <hr>
+{% empty %}
+    <p>No reviews yet.</p>
+{% endfor %}
+
+</body>
+</html>
