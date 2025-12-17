@@ -4,32 +4,51 @@ from book_review.models import Book_Review_forms
 from .forms import user_form
 from django.contrib.auth import authenticate, login, logout, get_user_model 
 from django.contrib.auth.decorators import login_required 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .serializers import RegisterSerializer
+
 
 User = get_user_model()
 
 # ---------------- REGISTER ----------------
-def register_user(request):
-    if request.method == "POST":
-        username = request.POST['username']
-        email = request.POST.get('email')
-        password1 = request.POST['password1']
-        password2 = request.POST['password2']
+# def register_user(request):
+#     if request.method == "POST":
+#         username = request.POST['username']
+#         email = request.POST.get('email')
+#         password1 = request.POST['password1']
+#         password2 = request.POST['password2']
 
-        if password1 != password2:
-            messages.error(request, "Passwords do not match")
-            return render(request, 'register.html')
+#         if password1 != password2:
+#             messages.error(request, "Passwords do not match")
+#             return render(request, 'register.html')
 
-        if User.objects.filter(username=username).exists():
-            messages.error(request, "Username already exists")
-            return render(request, "register.html")
+#         if User.objects.filter(username=username).exists():
+#             messages.error(request, "Username already exists")
+#             return render(request, "register.html")
 
-        user = User.objects.create_user(username=username, email=email, password=password1)
-        user.save()
-        messages.success(request, "Account created successfully. Please login.")
-        return redirect('login')   
+#         user = User.objects.create_user(username=username, email=email, password=password1)
+#         user.save()
+#         messages.success(request, "Account created successfully. Please login.")
+#         return redirect('login')   
 
-    return render(request, "register.html")  
+#     return render(request, "register.html")
 
+# --------------------Register API------------------------
+class RegisterApiview(APIView):
+    def post(self, request):
+        serializer = RegisterSerializer(data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                {'message': 'user created successfully'},
+                status = status.HTTP_201_CREATED 
+            )
+        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
+def register_page(request):
+    return render(request, "register.html")
 
 # ---------------- LOGIN ----------------
 def login_user(request):
