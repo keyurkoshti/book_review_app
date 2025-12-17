@@ -1,8 +1,0 @@
-__pycache__
-db.sqlite3
-*.pyc
-*.pyo
-static
-templates
-book_photos
-data.json
