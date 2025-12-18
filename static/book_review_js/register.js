@@ -1,7 +1,7 @@
 document.getElementById('registerform').addEventListener("submit", async function(event) {
     event.preventDefault(); //stop refresh page
 
-    const response = await fetch('api/register',{
+    const response = await fetch('/api/register/',{
         method : "POST",
         headers : {
             "content-type" : "application/json",
@@ -19,9 +19,9 @@ document.getElementById('registerform').addEventListener("submit", async functio
 
     if (response.ok){
         alert("registration successful");
-        window.location.href = "{% url 'login' %}";
+        window.location.href = "/login/";
     }
     else {
-        document.getElementById('error').innerText = "somthing went wrong";
+        document.getElementById('error').innerText = data.error || "somthing went wrong";
     }
 });
