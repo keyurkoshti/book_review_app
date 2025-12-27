@@ -1,0 +1,49 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #74ebd5, #9face6);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 1.6s ease-in forwards;
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.container {
+    width: 800px;
+    margin: 50px auto;
+    background: white;
+    padding: 40px;
+    border: 2px solid black;
+    border-radius: 10px;
+    /* border-radius: 5px; */
+}
+input, textarea, select {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border: none;
+    border-bottom: 2px solid black;
+}
+button {
+    background: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+}
+.error {
+    color: red;
+}

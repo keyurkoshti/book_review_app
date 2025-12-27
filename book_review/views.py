@@ -1,56 +1,43 @@
 from django.contrib import messages 
 from django.shortcuts import render, redirect 
-from book_review.models import Book_Review_forms
+from .models import Book_Review_forms, book, Category
 from .forms import user_form
 from django.contrib.auth import authenticate, login, logout, get_user_model 
 from django.contrib.auth.decorators import login_required 
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from .serializers import RegisterSerializer
+# from rest_framework.views import APIView
 
 
 User = get_user_model()
 
-# ---------------- REGISTER ----------------
-# def register_user(request):
-#     if request.method == "POST":
-#         username = request.POST['username']
-#         email = request.POST.get('email')
-#         password1 = request.POST['password1']
-#         password2 = request.POST['password2']
 
-#         if password1 != password2:
-#             messages.error(request, "Passwords do not match")
-#             return render(request, 'register.html')
+# ---------------- Register User ----------------
+def register_user(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        email = request.POST.get('email')
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
 
-#         if User.objects.filter(username=username).exists():
-#             messages.error(request, "Username already exists")
-#             return render(request, "register.html")
+        if password1 != password2:
+            messages.error(request, "Passwords do not match")
+            return render(request, 'register.html')
 
-#         user = User.objects.create_user(username=username, email=email, password=password1)
-#         user.save()
-#         messages.success(request, "Account created successfully. Please login.")
-#         return redirect('login')   
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Username already exists")
+            return render(request, "register.html")
 
-#     return render(request, "register.html")
+        user = User.objects.create_user(
+            username=username, 
+            email=email, 
+            password=password1)
+        user.save()
+        messages.success(request, "Account created successfully. Please login.")
+        return redirect('login')   
 
-# --------------------Register API------------------------
-class RegisterApiview(APIView):
-    def post(self, request):
-        serializer = RegisterSerializer(data = request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(
-                {'message': 'user created successfully'},
-                status = status.HTTP_201_CREATED 
-            )
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
-
-def register_page(request):
     return render(request, "register.html")
 
-# ---------------- LOGIN ----------------
+
+# ---------------- Login User ----------------
 def login_user(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -69,14 +56,14 @@ def login_user(request):
     return render(request, 'login.html')  
 
 
-# ---------------- LOGOUT ----------------
+# ---------------- Logout User ----------------
 def logout_user(request):
     logout(request)
     messages.info(request, "You have been logged out.")
     return redirect('login') 
 
 
-# ---------------- ADD REVIEW FORM (index.html) ----------------
+# ---------------- Book Review Form ----------------
 @login_required(login_url='login')
 def form_view(request):
     if request.method == 'POST':
@@ -92,9 +79,37 @@ def form_view(request):
     return render(request, 'index.html', {'form': form})
 
 
-# ---------------- LIST ALL REVIEWS (home.html) ----------------
+# ---------------- Home page ----------------
 @login_required(login_url='login')
 def home(request):
     reviews = Book_Review_forms.objects.all().order_by('-id')
     return render(request, 'home.html', {'reviews': reviews})   
 
+
+# --------------------Book Info------------------------
+@login_required(login_url='login')
+def book_info(request):
+    categories = Category.objects.all()
+    if request.method == "POST":
+        title = request.POST['title']
+        category_id  = request.POST['category']
+        author = request.POST['author']
+        rating = request.POST['rating']
+        comment = request.POST['comment']
+        description = request.POST['description']
+
+        category = Category.objects.get(id=category_id)
+
+        book.objects.create(
+            title=title,
+            category=category,
+            author=author,
+            rating=rating,
+            comment=comment,
+            description=description
+        )
+        messages.success(request, "Book added successfully")
+        return redirect('form_view')
+    
+    
+    return render(request, 'book.html', {'categories': categories})
