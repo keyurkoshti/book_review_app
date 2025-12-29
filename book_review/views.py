@@ -48,7 +48,7 @@ def login_user(request):
         if user is not None:
             login(request, user)
             request.session.set_expiry(900)
-            return redirect('form_view') 
+            return redirect('home') 
         else:
             messages.error(request, "Invalid credentials")
             return render(request, 'login.html')
@@ -76,7 +76,7 @@ def form_view(request):
             return redirect('home') 
     else:
         form = user_form()
-    return render(request, 'index.html', {'form': form})
+    return render(request, 'book_review_form.html', {'form': form})
 
 
 # ---------------- Home page ----------------
