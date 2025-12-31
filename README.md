@@ -2,7 +2,7 @@ project_name: book Review app
 technology: python 
 environment: virtual enviornment
 framework: django
-database: dbsqlite3
+database: MySQL
 
 
 built a model store book name, photo, url, reviews about book
