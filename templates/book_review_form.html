@@ -13,7 +13,11 @@
  <form method='POST' enctype='multipart/form-data'>
   {% csrf_token %}
     <label>book_name:</label>
-    <input type="text" name="book_name" required>
+    {{form.book}}
+    {% comment %} <select name="book" id="bookSelect" required>
+      <option value="">Loading books...</option>
+    </select>  {% endcomment %}
+    {% comment %} <input type="text" name="book_name" required> {% endcomment %}
     <br>   
     <label>book_photo:</label>
     <input type="file" name="book_photo" accept="image/*" required>

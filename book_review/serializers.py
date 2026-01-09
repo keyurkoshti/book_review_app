@@ -9,12 +9,18 @@ class RegisterSerializer(serializers.Serializer):
 
     def validate(self, data):
         if data['password1'] != data['password2']:
-            raise serializers.ValidationError("password does not match !")
+            raise serializers.ValidationError({
+                "password" : "password does not match !"
+                })
         
         if User.objects.filter(username = data['username']).exists():
-            raise serializers.ValidationError('username already exists !')
+            raise serializers.ValidationError({
+                'username' : 'username already exists !'
+                })
         
+        print(data)
         return data
+         
         
     def create(self, validated_data):
         return User.objects.create_user(

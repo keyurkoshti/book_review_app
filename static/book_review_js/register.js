@@ -1,3 +1,7 @@
+function getCSRFToken() {
+    return document.querySelector('[name=csrfmiddlewaretoken]').value;
+}
+
 document.getElementById('registerform').addEventListener("submit", async function(event) {
     event.preventDefault(); //stop refresh page
 
@@ -5,7 +9,7 @@ document.getElementById('registerform').addEventListener("submit", async functio
         method : "POST",
         headers : {
             "content-type" : "application/json",
-            "X-CSRFToken" : "{{ csrf-token }}"
+            "X-CSRFToken" : getCSRFToken()
         },
         body: JSON.stringify({
             username : document.getElementById('username').value,

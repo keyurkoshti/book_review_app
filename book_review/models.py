@@ -15,7 +15,7 @@ class Category(models.Model):
 
 
 # ---------------------Book Model--------------------------------
-class book(models.Model):
+class Book(models.Model):
     title = models.CharField(max_length=100)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     author = models.CharField(max_length=100)
@@ -31,14 +31,14 @@ class book(models.Model):
 # -----------------book review model------------------------------
 class Book_Review_forms(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    book = models.ForeignKey(book, on_delete=models.CASCADE, null=True, blank=True)
-    book_name=models.CharField(max_length=50)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, null=True, blank=True)
+    # book_name=models.CharField(max_length=50)
     book_photo=models.ImageField(upload_to='book_photos/')
     book_url=models.URLField()
     book_review=models.CharField(max_length=500)
     created_at = models.DateTimeField(default=timezone.now) 
 
     def __str__(self):
-        return f"{self.book_name} - {self.user}"
+        return f"{self.book} - {self.user}"
 
     

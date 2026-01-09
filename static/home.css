@@ -1,56 +1,64 @@
-/* General Page Styling */
+/* -----------------------------------------General Page Styling---------------------------------------------- */
 body {
+    margin: 0px;
+    padding: 0px;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #f9f9f9;
-    margin: 0;
-    padding: 20px;
     color: #333;
 }
 
-/* Heading */
-h1 {
-    text-align: center;
+/* ----------------------------Heading--------------------------------- */
+.main-header {
     color: #2c3e50;
-    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    padding: 12px 24px;
 }
 
-/* Review Card */
-div {
+.left-section {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+
+.logo {
+    height: 50px;
+    width: auto;
+}
+
+.right-section button {
+    margin-top: 27px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.right-section button:hover {
+    background-color: white;
+    color: black;
+    font: bold;
+    
+}
+
+/* --------------------------------------------Review Card-------------------------------------- */
+div.review-card {
     background-color: #ffffff;
     border-radius: 12px;
-    padding: 24px;
+    padding: 20px;
     margin: 20px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Hover effect */
-div:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
-}
-
-/* div {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
-}
-
-div:hover {
-    transform: scale(1.02);
-} */
-
-/* Book Title */
+/* ------------------------------------------Book Title--------------------------------------- */
 h3 {
     color: #2980b9;
     margin-top: 0;
 }
 
-/* Book Image */
+/* -------------------------------------------Book Image--------------------------------------- */
 img {
     display: block;
     margin: 10px 0;
@@ -59,7 +67,7 @@ img {
     height: auto;
 }
 
-/* Book URL link */
+/* -----------------------------------------Book URL link------------------------------------------ */
 a {
     color: #27ae60;
     text-decoration: none;
@@ -70,18 +78,18 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Review Text */
+/* ------------------------------------------------Review Text------------------------------------------ */
 p {
     line-height: 1.6;
     margin: 8px 0;
 }
 
-/* Reviewed By */
+/* ---------------------------------------------Reviewed By--------------------------------------------- */
 em {
     color: #7f8c8d;
 }
 
-/* Horizontal Rule */
+/* ---------------------------------------------Horizontal Rule---------------------------------------------- */
 hr {
     border: 0;
     border-top: 1px solid #eee;

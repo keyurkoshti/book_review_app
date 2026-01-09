@@ -17,5 +17,3 @@ class RegisterApiview(APIView):
             )
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
-def register_page(request):
-    return render(request, "register.html")

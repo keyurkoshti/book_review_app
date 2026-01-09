@@ -1,9 +1,9 @@
 from django.contrib import messages 
 from django.shortcuts import render, redirect 
-from .models import Book_Review_forms, book, Category
+from .models import Book_Review_forms, Book, Category
 from .forms import user_form
 from django.contrib.auth import authenticate, login, logout, get_user_model 
-from django.contrib.auth.decorators import login_required 
+from django.contrib.auth.decorators import login_required, user_passes_test
 # from rest_framework.views import APIView
 
 
@@ -36,6 +36,9 @@ def register_user(request):
 
     return render(request, "register.html")
 
+# ----------------------api call register page-----------------------------
+# def register_page(request):
+#     return render(request, "register.html")
 
 # ---------------- Login User ----------------
 def login_user(request):
@@ -87,7 +90,11 @@ def home(request):
 
 
 # --------------------Book Info------------------------
-@login_required(login_url='login')
+def is_admin(user):
+    return user.is_staff
+
+# @login_required(login_url='login')
+@user_passes_test(is_admin, login_url='login')
 def book_info(request):
     categories = Category.objects.all()
     if request.method == "POST":
@@ -100,7 +107,7 @@ def book_info(request):
 
         category = Category.objects.get(id=category_id)
 
-        book.objects.create(
+        Book.objects.create(
             title=title,
             category=category,
             author=author,
@@ -113,3 +120,16 @@ def book_info(request):
     
     
     return render(request, 'book.html', {'categories': categories})
+
+
+# ----------------------------------User Profile-----------------------------------
+@login_required(login_url='login')
+def profile_view(request):
+    user = request.user
+    reviews_count = Book_Review_forms.objects.filter(user=user).count()
+
+    detail = {
+        "username": user,
+        "reviews_count": reviews_count
+    }
+    return render(request, 'profile.html', detail)
